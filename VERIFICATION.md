@@ -27,3 +27,5 @@ It passed Linux dependency installation, typechecking, static export, artifact v
 The workflow runs on pushes to `main` and supports manual dispatch. The final production push retains the same tests and includes the progressive-enhancement fallback refinement. HTTPS is enforced. The `karlmendoo.github.io` repository was not modified.
 
 The initial live deployment also passed HTTP checks for all ten directly referenced JavaScript/CSS/favicon/CV URLs. The downloaded production CV matched the original SHA-256 above. Live mobile navigation closed its menu, updated the hash, focused the work section, and showed no horizontal overflow or console errors. The desktop hero changed from the name composition to the systems/people statement during an actual wheel scroll.
+
+The responsive enhancement lifecycle was tested after the final refinement: the desktop hero initializes at 180svh, and resizing to mobile removes the enhancement class and returns the hero to a normal 100svh layout.
