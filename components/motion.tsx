@@ -40,17 +40,16 @@ export function PortfolioMotion() {
       const target = document.getElementById(hash.slice(1));
       if (!target) return;
       event.preventDefault();
-      const complete = () => {
-        if (window.location.hash !== hash)
-          window.history.pushState(null, "", hash);
-        focusTarget(target);
-      };
+      // Update navigation immediately, including when already at the target or
+      // when a wheel gesture interrupts the smooth scroll before completion.
+      if (window.location.hash !== hash)
+        window.history.pushState(null, "", hash);
+      focusTarget(target);
       // Lenis reads CSS scroll-padding itself; adding an offset would double it.
       if (lenis)
-        lenis.scrollTo(target, { duration: 0.95, onComplete: complete });
+        lenis.scrollTo(target, { duration: 0.95 });
       else {
         target.scrollIntoView({ behavior: "instant", block: "start" });
-        complete();
       }
     }
     document.addEventListener("click", onAnchor);
