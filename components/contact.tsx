@@ -58,8 +58,29 @@ export function Contact() {
             </span>
           </div>
           <div className="contact-links">
-            <a className="text-link" href={github} target="_blank" rel="noopener noreferrer" data-cursor="GITHUB">GitHub <span className="link-plus" aria-hidden="true">+</span></a>
-            <a className="text-link" href={assetPath("/normand-karol-mendoza-cv.pdf")} download data-cursor="CV">Download CV <span className="link-plus" aria-hidden="true">+</span></a>
+            <a
+              className="text-link"
+              href={github}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-cursor="GITHUB"
+            >
+              GitHub{" "}
+              <span className="link-plus" aria-hidden="true">
+                +
+              </span>
+            </a>
+            <a
+              className="text-link"
+              href={assetPath("/normand-karol-mendoza-cv.pdf")}
+              download
+              data-cursor="CV"
+            >
+              Download CV{" "}
+              <span className="link-plus" aria-hidden="true">
+                +
+              </span>
+            </a>
           </div>
         </div>
         <div className="contact-location">

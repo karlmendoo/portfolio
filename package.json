@@ -5,21 +5,25 @@
   "scripts": {
     "dev": "next dev --hostname 127.0.0.1",
     "build": "next build",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "verify:export": "node scripts/verify-export.mjs",
+    "preview": "node scripts/serve-export.mjs",
+    "format": "prettier --write app components lib scripts next.config.ts README.md .github/workflows/deploy.yml"
   },
   "dependencies": {
-    "next": "16.4.0",
-    "react": "19.3.0",
-    "react-dom": "19.3.0",
+    "@fontsource/dm-sans": "latest",
+    "@fontsource/instrument-serif": "latest",
     "gsap": "3.15.0",
     "lenis": "1.3.26",
-    "@fontsource/dm-sans": "latest",
-    "@fontsource/instrument-serif": "latest"
+    "next": "16.4.0",
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
   },
   "devDependencies": {
-    "typescript": "latest",
     "@types/node": "latest",
     "@types/react": "latest",
-    "@types/react-dom": "latest"
+    "@types/react-dom": "latest",
+    "prettier": "^3.9.9",
+    "typescript": "latest"
   }
 }

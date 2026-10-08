@@ -56,7 +56,11 @@ export function Education() {
       </div>
       <div className="resume-row">
         <p>For the full picture.</p>
-        <a className="text-link" href={assetPath("/normand-karol-mendoza-cv.pdf")} download>
+        <a
+          className="text-link"
+          href={assetPath("/normand-karol-mendoza-cv.pdf")}
+          download
+        >
           Download my CV{" "}
           <span className="download-icon" aria-hidden="true">
             +
