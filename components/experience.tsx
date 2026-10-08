@@ -18,9 +18,10 @@ export function Experience() {
           by <em>doing.</em>
         </h2>
         <p>
-          From the newsroom to student organizations
-          <br className="desktop-break" /> and backend AI. Different settings.
-          <br className="desktop-break" /> The same care for the work.
+          From outside the classroom to student organizations and hands-on
+          projects.
+          <br className="desktop-break" /> Different settings. The same care for
+          the work.
         </p>
       </div>
       <div className="experience-layout">
