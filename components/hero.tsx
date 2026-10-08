@@ -1,4 +1,5 @@
 import { assetPath } from "@/lib/paths";
+import { LocalClock } from "./local-clock";
 import { SplitText } from "./split-text";
 
 export function Hero() {
@@ -6,13 +7,13 @@ export function Hero() {
     <section className="hero" id="top" aria-labelledby="hero-heading">
       <div className="hero-stage">
         <div className="hero-topline mono">
-          <span>PERSONAL FIELD NOTES</span>
+          <LocalClock />
           <span>CALOOCAN, PHILIPPINES</span>
           <span>2026 / VOL. 01</span>
         </div>
         <div className="hero-title-wrap">
           <span className="hero-title-caption mono">
-            COMPUTER SCIENCE · DATA SCIENCE · BACKEND AI
+            COMPUTER SCIENCE · DATA SCIENCE
           </span>
           <h1
             id="hero-heading"

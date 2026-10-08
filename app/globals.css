@@ -233,6 +233,12 @@ p {
   gap: 24px;
   color: var(--muted);
 }
+.local-clock {
+  display: inline-flex;
+  gap: 10px;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
 .hero-title-wrap {
   position: relative;
   margin: auto 0;
@@ -1469,6 +1475,10 @@ details[open] .disclosure-symbol:after {
   }
 }
 @media (max-width: 420px) {
+  .hero-topline {
+    font-size: 11px;
+    gap: 12px;
+  }
   .project-heading {
     column-gap: 12px;
   }

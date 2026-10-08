@@ -31,3 +31,9 @@ Automatic push-triggered publication could not be verified: multiple Git pushes 
 The initial live deployment also passed HTTP checks for all ten directly referenced JavaScript/CSS/favicon/CV URLs. The downloaded production CV matched the original SHA-256 above. Live mobile navigation closed its menu, updated the hash, focused the work section, and showed no horizontal overflow or console errors. The desktop hero changed from the name composition to the systems/people statement during an actual wheel scroll.
 
 The responsive enhancement lifecycle was tested after the final refinement: the desktop hero initializes at 180svh, and resizing to mobile removes the enhancement class and returns the hero to a normal 100svh layout.
+
+## Local clock update
+
+The hero caption now reads `COMPUTER SCIENCE · DATA SCIENCE`. Its topline uses a client-side clock in place of `PERSONAL FIELD NOTES`. `Intl.DateTimeFormat` uses the visitor's browser timezone, with seconds updated every second and the interval cleared on unmount. A consistent initial placeholder prevents static-render hydration mismatches, and the clock has `aria-live="off"` to avoid repeated screen-reader announcements.
+
+Typechecking, the production build, and `/portfolio/` export verification pass. The exported site showed the clock advancing in the browser's Asia/Manila timezone with no console warnings or errors. Desktop and 320px mobile layouts were checked; the narrow layout keeps the clock and volume label on one line without horizontal overflow.
