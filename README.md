@@ -27,6 +27,8 @@ In the repository, open **Settings → Pages → Build and deployment → Source
 
 The `configure-pages` action supplies the real deployment base path and URL. These become `NEXT_PUBLIC_BASE_PATH` and `NEXT_PUBLIC_SITE_URL` at build time. Next's `basePath` prefixes generated JavaScript and CSS; `assetPath()` prefixes public files, including the CV and favicon. Hash navigation stays within the current deployment path. All repository and profile links are absolute GitHub URLs.
 
+Deployment verification note (9 October 2026): manual Actions deployment succeeded. GitHub did not create runs for the tested production pushes despite the enabled Actions settings and configured `main` push event. Automatic publication remains unverified. Until that is resolved, use **Actions → Deploy portfolio to GitHub Pages → Run workflow → main** to publish changes. The same build and verification steps run in both modes.
+
 ### Test a repository subpath locally
 
 PowerShell:

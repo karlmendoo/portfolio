@@ -24,7 +24,9 @@ The initial Actions deployment succeeded on commit `36879fcefbd392281438bfbf10d6
 
 It passed Linux dependency installation, typechecking, static export, artifact verification, upload, and Pages deployment. The live URL returned HTTP 200. The browser confirmed the correct title, canonical URL, fonts, CV prefix, and exact profile/project URLs at `https://karlmendoo.github.io/portfolio/`.
 
-The workflow runs on pushes to `main` and supports manual dispatch. The final production push retains the same tests and includes the progressive-enhancement fallback refinement. HTTPS is enforced. The `karlmendoo.github.io` repository was not modified.
+The workflow is configured for pushes to `main` and supports manual dispatch. The final production push retains the same tests and includes the progressive-enhancement fallback refinement. HTTPS is enforced. The `karlmendoo.github.io` repository was not modified.
+
+Automatic push-triggered publication could not be verified: multiple Git pushes and a GitHub API commit did not create new Actions runs, despite the correct push event, active workflow, enabled Actions settings, and production default branch. Manual dispatch does start the workflow successfully. This is a remaining deployment limitation; no account-side cause was established.
 
 The initial live deployment also passed HTTP checks for all ten directly referenced JavaScript/CSS/favicon/CV URLs. The downloaded production CV matched the original SHA-256 above. Live mobile navigation closed its menu, updated the hash, focused the work section, and showed no horizontal overflow or console errors. The desktop hero changed from the name composition to the systems/people statement during an actual wheel scroll.
 
