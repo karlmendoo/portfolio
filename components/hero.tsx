@@ -1,55 +1,27 @@
+import { assetPath } from "@/lib/paths";
+import { SplitText } from "./split-text";
+
 export function Hero() {
   return (
-    <section className="hero section" id="top" aria-labelledby="hero-heading">
-      <div className="hero-topline">
-        <span>COMPUTER SCIENCE · BACKEND AI</span>
-        <span>CALOOCAN CITY, PHILIPPINES</span>
-      </div>
-      <h1 id="hero-heading" className="hero-name">
-        <span className="line-mask">
-          <span className="hero-line">Normand Karol</span>
-        </span>
-        <span className="line-mask second-line">
-          <span className="hero-line">
-            Mendoza<span className="name-period">.</span>
-          </span>
-        </span>
-      </h1>
-      <div className="hero-bottom">
-        <div className="hero-position">
-          <span className="eyebrow">A LITTLE ABOUT MY DIRECTION</span>
-          <p>
-            A mind for systems.
-            <br />
-            <em>An instinct for people.</em>
-          </p>
+    <section className="hero" id="top" aria-labelledby="hero-heading">
+      <div className="hero-stage">
+        <div className="hero-topline mono">
+          <span>PERSONAL FIELD NOTES</span><span>CALOOCAN, PHILIPPINES</span><span>2026 / VOL. 01</span>
         </div>
-        <div className="hero-summary">
-          <p>
-            Computer Science student at UST.
-            <br />
-            Backend AI intern at FlyRank AI.
-            <br />
-            Bringing clarity, care, and coordination
-            <br className="desktop-break" /> to the work I do.
-          </p>
-          <a className="text-link" href="#experience">
-            Explore my experience{" "}
-            <span className="link-plus" aria-hidden="true">
-              +
-            </span>
-          </a>
+        <div className="hero-title-wrap">
+          <span className="hero-title-caption mono">COMPUTER SCIENCE · DATA SCIENCE · BACKEND AI</span>
+          <h1 id="hero-heading" className="hero-name" aria-label="Normand Karol Mendoza">
+            <span className="hero-name-row"><SplitText text="NORMAND" /><em className="hero-karol">Karol</em></span>
+            <span className="hero-name-row hero-last"><SplitText text="MENDOZA" /><span className="hero-asterisk" aria-hidden="true">✳</span></span>
+          </h1>
+          <div className="hero-reveal"><span className="mono">A WORK IN PROGRESS</span><p>A mind for systems.<br /><em>An instinct for people.</em></p></div>
         </div>
-        <a href="#about" className="scroll-cue" aria-label="Scroll to about">
-          <span className="scroll-track">
-            <span />
-          </span>
-          <span>SCROLL TO DISCOVER</span>
-        </a>
-      </div>
-      <div className="hero-rule">
-        <span>PERSONAL PORTFOLIO</span>
-        <span>01 — 05</span>
+        <div className="hero-bottom">
+          <a className="scroll-cue mono" href="#about"><span className="scroll-track" aria-hidden="true"><span /></span>SCROLL TO EXPLORE</a>
+          <p>Computer Science student at UST.<br />Backend AI intern at FlyRank AI.</p>
+          <a className="text-link" href={assetPath("/normand-karol-mendoza-cv.pdf")} download data-cursor="CV">Download CV <span className="link-plus" aria-hidden="true">+</span></a>
+        </div>
+        <div className="hero-edge mono" aria-hidden="true"><span>NKM / INDEX</span><span>THE NEXT CHAPTER</span></div>
       </div>
     </section>
   );

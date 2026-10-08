@@ -1,6 +1,7 @@
 // The CV supplies professional facts; the newer experience image adds current roles
 // and takes precedence for the Computer Science Society role dates.
 export const email = "normandkarol.mendoza@ust.edu.ph";
+export const github = "https://github.com/karlmendoo";
 export const experience = [
   {
     organization: "FlyRank AI",

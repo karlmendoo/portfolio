@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import { email } from "@/lib/content";
+import { email, github } from "@/lib/content";
+import { assetPath } from "@/lib/paths";
 export function Contact() {
   const [status, setStatus] = useState("");
   const timeout = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -27,14 +28,14 @@ export function Contact() {
       aria-labelledby="contact-heading"
     >
       <div className="section-label">
-        <span>05 / CONTACT</span>
+        <span>07 / THE NEXT CHAPTER</span>
         <span className="label-line" />
         <span>LET’S CONNECT</span>
       </div>
       <h2 id="contact-heading">
-        <span className="contact-line">Good things start</span>
+        <span className="contact-line">Let’s make</span>
         <span className="contact-line">
-          with a <em>conversation.</em>
+          a <em>connection.</em>
         </span>
       </h2>
       <div className="contact-bottom">
@@ -56,6 +57,10 @@ export function Contact() {
               {status}
             </span>
           </div>
+          <div className="contact-links">
+            <a className="text-link" href={github} target="_blank" rel="noopener noreferrer" data-cursor="GITHUB">GitHub <span className="link-plus" aria-hidden="true">+</span></a>
+            <a className="text-link" href={assetPath("/normand-karol-mendoza-cv.pdf")} download data-cursor="CV">Download CV <span className="link-plus" aria-hidden="true">+</span></a>
+          </div>
         </div>
         <div className="contact-location">
           <span className="eyebrow">BASED IN</span>
@@ -72,7 +77,7 @@ export function Contact() {
         </a>
         <span>© 2026</span>
         <a className="back-top text-link" href="#top">
-          Back to top <span aria-hidden="true">↑</span>
+          Back to top <span aria-hidden="true">+</span>
         </a>
       </div>
     </footer>

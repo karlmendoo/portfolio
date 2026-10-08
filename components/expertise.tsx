@@ -7,7 +7,7 @@ export function Expertise() {
       aria-labelledby="expertise-heading"
     >
       <div className="section-label">
-        <span>03 / EXPERTISE</span>
+        <span>05 / THE HUMAN SIDE</span>
         <span className="label-line" />
       </div>
       <div className="expertise-intro">

@@ -1,3 +1,4 @@
+import { assetPath } from "@/lib/paths";
 export function Education() {
   return (
     <section
@@ -6,7 +7,7 @@ export function Education() {
       aria-labelledby="education-heading"
     >
       <div className="section-label">
-        <span>04 / EDUCATION & LEARNING</span>
+        <span>06 / EDUCATION & LEARNING</span>
         <span className="label-line" />
       </div>
       <div className="education-title">
@@ -55,10 +56,10 @@ export function Education() {
       </div>
       <div className="resume-row">
         <p>For the full picture.</p>
-        <a className="text-link" href="/normand-karol-mendoza-cv.pdf" download>
+        <a className="text-link" href={assetPath("/normand-karol-mendoza-cv.pdf")} download>
           Download my CV{" "}
           <span className="download-icon" aria-hidden="true">
-            ↓
+            +
           </span>
         </a>
       </div>

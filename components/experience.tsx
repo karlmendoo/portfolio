@@ -7,7 +7,7 @@ export function Experience() {
       aria-labelledby="experience-heading"
     >
       <div className="section-label">
-        <span>02 / EXPERIENCE</span>
+        <span>04 / EXPERIENCE</span>
         <span className="label-line" />
         <span>2023 — PRESENT</span>
       </div>
