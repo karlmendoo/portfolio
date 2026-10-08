@@ -157,6 +157,8 @@ export function PortfolioMotion() {
     media.add(
       "(min-width: 1000px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)",
       () => {
+        // The static page uses a normal hero until its scroll enhancement is ready.
+        document.documentElement.classList.add("motion-desktop");
         const hero = gsap.timeline({
           scrollTrigger: {
             trigger: ".hero",
@@ -274,6 +276,7 @@ export function PortfolioMotion() {
         document.documentElement.addEventListener("pointerleave", hide);
         window.addEventListener("blur", hide);
         return () => {
+          document.documentElement.classList.remove("motion-desktop");
           document.removeEventListener("pointermove", move);
           document.documentElement.removeEventListener("pointerleave", hide);
           window.removeEventListener("blur", hide);
