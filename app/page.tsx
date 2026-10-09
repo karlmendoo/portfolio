@@ -7,10 +7,13 @@ import { Expertise } from "@/components/expertise";
 import { Education } from "@/components/education";
 import { Contact } from "@/components/contact";
 import { PortfolioMotion } from "@/components/motion";
+import { MusicProvider } from "@/components/music-provider";
+import { MusicPlayer, MiniPlayer } from "@/components/music-player";
+import { getMusicTracks } from "@/lib/music-assets";
 
 export default function Home() {
   return (
-    <>
+    <MusicProvider tracks={getMusicTracks()}>
       <a className="skip-link" href="#main">
         Skip to content
       </a>
@@ -72,9 +75,11 @@ export default function Home() {
         <Experience />
         <Expertise />
         <Education />
+        <MusicPlayer />
       </main>
       <Contact />
+      <MiniPlayer />
       <PortfolioMotion />
-    </>
+    </MusicProvider>
   );
 }

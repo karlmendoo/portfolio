@@ -1,6 +1,6 @@
 # Normand Karol Mendoza — Portfolio
 
-An art-directed, static portfolio built with Next.js, React, TypeScript, GSAP ScrollTrigger, and Lenis. The design uses a transforming typographic hero, a technical index, full-width project panels, and an accessible résumé and contact section. Typography is self-hosted; the page makes no external font requests.
+An art-directed, static portfolio built with Next.js, React, TypeScript, GSAP ScrollTrigger, and Lenis. The pastel-blue design retains the transforming typographic hero, technical index, full-width project panels, résumé, and contact section. A personal music player adds warm ambient light only during successful playback. Typography is self-hosted; the page makes no external font requests.
 
 ## Development
 
@@ -10,6 +10,7 @@ Run commands from this repository's root (the local `portfolio` directory). Node
 npm ci
 npm run dev
 npm run typecheck
+npm run test:music
 npm run build
 npm run verify:export
 npm run preview
@@ -66,7 +67,9 @@ The pre-redesign portfolio is preserved at commit `804455e2a54bc8546967989a23517
 - Branch `backup/pre-awwwards-redesign`
 - Tag `pre-awwwards-redesign`
 
-The new design is on `redesign/awwwards`; production uses its committed state on `main`. To inspect or run the original without changing production:
+The version immediately before the pastel/music refinement is preserved at `fe6b1a6e052fdc67ffebab2bbd64a9912c309df5` in branch `backup/pre-music-redesign` and tag `pre-music-redesign`, locally and on GitHub. This retains the dark Awwwards design, local clock, and revised experience introduction. The new refinement is on `codex/pastel-music`; production uses its committed state on `main`. The earlier `redesign/awwwards` branch is retained.
+
+To inspect or run the original without changing production:
 
 ```bash
 git switch backup/pre-awwwards-redesign
@@ -74,7 +77,46 @@ npm ci
 npm run dev
 ```
 
-Return with `git switch redesign/awwwards`. To create a separate recovery checkout, use `git worktree add ../portfolio-original backup/pre-awwwards-redesign` when that branch is not already checked out. The backup retains all original source, configuration, fonts, and CV. Do not delete these preservation refs.
+Return with `git switch codex/pastel-music`. To inspect the pre-music version, use `git switch backup/pre-music-redesign`. To create a separate recovery checkout, use `git worktree add ../portfolio-original backup/pre-awwwards-redesign` when that branch is not already checked out. To restore a version to production without rewriting history, create a normal revert commit or a reviewed restoration commit on `main`, then run the Pages workflow. Do not delete preservation refs or force-push recovery changes.
+
+## Music player
+
+The featured listening note is **Wonderwall — Oasis**. No Oasis recording or official artwork is included. The published player shows a custom abstract placeholder and keeps playback disabled until an authorized audio file is added. This is an intentional complete silent state, with no missing-file requests or false playing state.
+
+### Add authorized media
+
+Place files you are authorized to publish at:
+
+- `public/music/wonderwall.mp3`
+- `public/music/wonderwall-cover.webp`
+
+Then rebuild and deploy. `lib/music-assets.ts` checks file availability during the static build and passes the result to the client. It does not require a runtime server. Missing artwork uses the built-in placeholder; a cover that fails to decode also falls back. Actual playback remains available without a cover. Failed audio playback displays a quiet retry state and retains the blue atmosphere.
+
+All URLs use `assetPath()` and work under `/portfolio/`, at the domain root, or with a custom domain. Audio uses `preload="none"` and never autoplays; the first explicit Play action fetches it. Artwork is lazy-loaded. Audio files can be large, so use a suitably compressed, browser-compatible format.
+
+### How to change “what I’m feeling”
+
+1. Edit `tracks` in `lib/music.ts`; keep every `id` unique.
+2. Add the track title, artist, mood, audio path, cover path, and four curated mood colors.
+3. Place the authorized media in `public/music/` and use paths beginning `/music/` in the configuration.
+4. Set `featuredTrackId` to the new track's ID.
+5. Rebuild, run the checks, and deploy.
+
+Previous and Next controls enable automatically when there is more than one configured track. Switching during playback attempts to continue with the next track; switching while paused preserves the silent theme. Volume and mute survive track changes, while progress and duration reset.
+
+### Playback and atmosphere
+
+`MusicProvider` owns one stable native audio element outside the scroll sections. React context shares actual playback status, progress, duration, volume, and mute with the main player and navigation dock. Native `timeupdate` events update progress; no new RAF loop or AudioContext is used.
+
+Mood activates on the media element's successful [`playing` event](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/playing_event), with checks for the current source, playback intent, paused/ended state, and available data. A pending or rejected [`play()` promise](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/play) cannot activate the mood. Pause, end, buffering, seeking while playing, error, and cancellation restore the default palette. Resuming actual playback reactivates the track palette. Selection, artwork visibility, hover, and scroll position never choose the global atmosphere.
+
+`MoodController` blends the four ambient/detail CSS variables over 1.65 seconds, separately from ScrollTrigger choreography. It changes ambient lighting, the scroll progress line, cursor, and small player details. Body text, headings, and navigation colors remain stable. Fast play/pause changes overwrite only the mood tween, starting from its current colors. Reduced-motion mode uses a brief blend and static artwork/equalizer states, including when the preference changes during a transition.
+
+Palettes are manually curated in `lib/music.ts`; automatic artwork color extraction is deliberately omitted. This keeps art direction predictable and avoids an extra dependency or image processing. The default CSS values in `app/globals.css` match `defaultMood` for a complete static first render.
+
+After the first successful playback, scrolling away docks Play/Pause into the navigation. The mobile dock sits below the navigation and adjusts anchor clearance. It disappears while the mobile menu is open. Its visibility never affects playback or the mood.
+
+Run `npm run test:music` for playback state/configuration checks, `npm run build` for typechecking and static export, and `npm run verify:export` for public assets, subpaths, retained content, metadata, and no-autoplay/custom-control checks. Real browser playback checks are recorded in `VERIFICATION.md`.
 
 ## Content provenance
 
@@ -107,6 +149,9 @@ Latin font subsets limit font downloads. The split-text component adds no librar
 - `components/experience.tsx`, `expertise.tsx`, `education.tsx`: preserved résumé content.
 - `components/contact.tsx`: mail link, copy interaction, GitHub, and CV.
 - `components/motion.tsx`: centralized animation and scrolling.
+- `lib/music.ts`, `music-assets.ts`, `playback.ts`: track configuration, build-time media checks, and playback state.
+- `components/music-provider.tsx`, `music-player.tsx`: audio engine, mood controller, player, and navigation dock.
+- `app/music.css`: ambient lighting and music interface.
 - `app/globals.css`: visual system and responsive/reduced-motion compositions.
 - `scripts/verify-export.mjs`: production artifact checks.
 - `scripts/serve-export.mjs`: local static preview.

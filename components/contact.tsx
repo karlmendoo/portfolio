@@ -28,7 +28,7 @@ export function Contact() {
       aria-labelledby="contact-heading"
     >
       <div className="section-label">
-        <span>07 / THE NEXT CHAPTER</span>
+        <span>08 / THE NEXT CHAPTER</span>
         <span className="label-line" />
         <span>LET’S CONNECT</span>
       </div>

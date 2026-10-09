@@ -7,6 +7,7 @@ import "@fontsource/instrument-serif/latin-400-italic.css";
 import { assetPath, siteUrl } from "@/lib/paths";
 import "lenis/dist/lenis.css";
 import "./globals.css";
+import "./music.css";
 
 const description =
   "Normand Karol Mendoza — Computer Science student majoring in Data Science at UST and Backend AI Engineering intern at FlyRank AI. Experience in editorial leadership, event coordination, and student organizations.";

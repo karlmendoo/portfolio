@@ -16,6 +16,11 @@ const mime = {
   ".woff2": "font/woff2",
   ".woff": "font/woff",
   ".txt": "text/plain",
+  ".mp3": "audio/mpeg",
+  ".wav": "audio/wav",
+  ".webp": "image/webp",
+  ".png": "image/png",
+  ".jpg": "image/jpeg",
 };
 http
   .createServer(async (request, response) => {
@@ -36,12 +41,39 @@ http
       if ((await stat(file)).isDirectory())
         file = path.join(file, "index.html");
       const content = await readFile(file);
-      response.writeHead(200, {
+      const headers = {
         "Content-Type": mime[path.extname(file)] ?? "application/octet-stream",
         "Cache-Control": "no-store",
+        "Accept-Ranges": "bytes",
         "Content-Length": content.length,
-      });
-      response.end(content);
+      };
+      const range = request.headers.range?.match(/^bytes=(\d*)-(\d*)$/);
+      if (range) {
+        const start = range[1]
+          ? Number(range[1])
+          : Math.max(0, content.length - Number(range[2]));
+        const end =
+          range[1] && range[2]
+            ? Math.min(Number(range[2]), content.length - 1)
+            : content.length - 1;
+        if (start > end || start >= content.length) {
+          response.writeHead(416, {
+            "Content-Range": `bytes */${content.length}`,
+          });
+          response.end();
+          return;
+        }
+        const slice = content.subarray(start, end + 1);
+        response.writeHead(206, {
+          ...headers,
+          "Content-Range": `bytes ${start}-${end}/${content.length}`,
+          "Content-Length": slice.length,
+        });
+        response.end(request.method === "HEAD" ? undefined : slice);
+      } else {
+        response.writeHead(200, headers);
+        response.end(request.method === "HEAD" ? undefined : content);
+      }
     } catch {
       response.writeHead(404, { "Content-Type": "text/plain" });
       response.end("Not found");

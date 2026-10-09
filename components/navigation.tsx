@@ -6,6 +6,7 @@ const links = [
   ["Skills", "skills"],
   ["Work", "work"],
   ["Experience", "experience"],
+  ["Listening", "listening"],
   ["Contact", "contact"],
 ];
 export function Navigation() {
@@ -63,6 +64,7 @@ export function Navigation() {
           </a>
         ))}
       </nav>
+      <div className="music-dock" id="music-dock" />
       <a
         className="nav-contact"
         href={github}

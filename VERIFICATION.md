@@ -37,3 +37,41 @@ The responsive enhancement lifecycle was tested after the final refinement: the 
 The hero caption now reads `COMPUTER SCIENCE · DATA SCIENCE`. Its topline uses a client-side clock in place of `PERSONAL FIELD NOTES`. `Intl.DateTimeFormat` uses the visitor's browser timezone, with seconds updated every second and the interval cleared on unmount. A consistent initial placeholder prevents static-render hydration mismatches, and the clock has `aria-live="off"` to avoid repeated screen-reader announcements.
 
 Typechecking, the production build, and `/portfolio/` export verification pass. The exported site showed the clock advancing in the browser's Asia/Manila timezone with no console warnings or errors. Desktop and 320px mobile layouts were checked; the narrow layout keeps the clock and volume label on one line without horizontal overflow.
+
+## Pastel-blue and music refinement — 10 October 2026
+
+Before changes, the clean working version at `fe6b1a6e052fdc67ffebab2bbd64a9912c309df5` was preserved in branch `backup/pre-music-redesign` and tag `pre-music-redesign`, locally and on GitHub. Both original Awwwards preservation refs remain at `804455e2a54bc8546967989a2351797f28620a25`. Work is on `codex/pastel-music`.
+
+Core content, projects, technical skills, résumé sections, hero composition, local clock, and recent experience copy are unchanged. The CV SHA-256 still matches the original. Navigation gains Listening; contact becomes section 08. The motion module's only refinement is adding the artwork and controls to its existing row-reveal choreography. Dependencies and Next configuration are unchanged.
+
+The palette uses centralized navy text and pastel-blue surfaces, layered fixed lighting, subtle grain, and coordinated project art. Representative contrast checks measured 12.89:1 for primary text on the blue base, 4.81:1 for secondary text on the darker default ambient blue, and 5.03:1 for blue accent text on the soft blue surface. The changing warm detail color is used for graphical/player accents rather than body text.
+
+### Playback verification
+
+No Oasis recording or official cover was acquired. Local browser QA used a temporary 60-second silent PCM fixture, a second silent test track, and intentionally invalid media/artwork. These fixtures and the temporary playlist entry were removed before the production export; `public/music/` and the final `out/music/` contain only `.gitkeep`.
+
+The actual exported app passed these checks:
+
+- Initial track selection and visible player kept the default blue mood; no autoplay occurred.
+- Play activated the mood through successful native `playing` events, and the four variables reached the configured Wonderwall palette.
+- Pause returned all four variables to their default blue values and preserved progress. Resume continued from about 29 seconds rather than restarting.
+- Music continued after navigating to About, with exactly one audio element. The navigation dock paused it and returned the global atmosphere to blue.
+- Keyboard volume, mute/unmute, zero-volume recovery, and seek controls worked. Active seeking resumed through `playing`, not through selection or a seek-completion assumption.
+- Seeking to 58 seconds and resuming produced a natural `ended` event at 60 seconds, with the blue palette fully restored.
+- Invalid media kept the default mood and a stable retry message. Restoring the fixture and retrying recovered successful playback without reloading the page.
+- Paused Previous/Next selection stayed blue. Switching during playback continued with the next source and its actual mood. Volume and mute were preserved.
+- Invalid artwork fell back to the original abstract listening-note design with no broken-image icon.
+
+Selection/hover/scroll do not have any path to ambient theme mutation; only playback state drives the controller. Buffering and cancellation transitions are covered by the playback-state checks and reviewed native event handlers. Browser-generated buffering was not forced on the fully local fixture.
+
+The local static server now supports byte ranges; an audio request for bytes 0–43 returned HTTP 206 with 44 bytes. This fixed a local-preview seeking limitation. GitHub Pages supplies production static-file serving.
+
+### Responsive, accessibility, and export checks
+
+The production export was checked at 1920, 1280, 768, 390, and 320px viewport widths; all reported equal document and viewport widths. The player remained within its content column. Desktop playback and the 390px mobile player were visually inspected. The active/paused dock was also checked at 900px: all navigation elements fit without overflow. Mobile moves the dock below the header and adds anchor clearance, keeping it out of portfolio text. The mobile menu closes after navigation. Resizing to mobile removes desktop hero enhancement and the cursor.
+
+Playback, pause, seek, volume, and navigation were exercised with keyboard input. Focus outlines remained visible. Time changes are not live-announced; playback status uses a separate polite status region. Controls use semantic buttons and range inputs with track-specific labels. Previous/Next are disabled with the single production track. The production missing-audio state keeps Play disabled, makes no absent-media request, shows metadata and the artwork placeholder, and stays blue.
+
+Reduced-motion CSS and the theme controller's media-query listener were reviewed: equalizer/artwork animation stops, the mood blend is brief, and preference changes cancel the active mood tween. The connected browser cannot emulate the system preference, so a native reduced-motion rendering test was not available.
+
+Typechecking, `npm run test:music`, production builds, and static-export checks passed. Root-domain and `/portfolio/` exports were verified; the final export uses the real GitHub Pages URL. Checks include all referenced assets, retained facts, anchors, canonical URL, CV, music metadata, no autoplay, custom controls, and matching static/default mood colors. The final silent export has no console warnings or errors. No additional dependency, AudioContext, WebGL workload, or RAF loop was introduced.

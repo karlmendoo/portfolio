@@ -36,7 +36,9 @@ async function checkAsset(url, fromFile = path.join(output, "index.html")) {
   );
   verified.add(file);
 }
-for (const tag of html.matchAll(/<(?:script|link|img|a|source)\b[^>]*>/g)) {
+for (const tag of html.matchAll(
+  /<(?:script|link|img|a|source|audio)\b[^>]*>/g,
+)) {
   if (/rel="(?:preconnect|dns-prefetch)"/.test(tag[0])) continue;
   for (const match of tag[0].matchAll(/\b(?:src|href)="([^"]+)"/g))
     await checkAsset(match[1]);
@@ -47,8 +49,10 @@ async function walk(directory) {
     if (entry.isDirectory()) await walk(file);
     else if (entry.name.endsWith(".css")) {
       const css = await readFile(file, "utf8");
-      for (const match of css.matchAll(/url\(\s*["']?([^"')]+)["']?\s*\)/g))
-        await checkAsset(match[1], file);
+      for (const match of css.matchAll(
+        /url\(\s*(?:"([^"]*)"|'([^']*)'|([^\s)]+))\s*\)/g,
+      ))
+        await checkAsset(match[1] ?? match[2] ?? match[3], file);
     }
   }
 }
@@ -68,6 +72,8 @@ for (const fact of [
   "Leadership",
   "Coordination",
   "Adaptability",
+  "Wonderwall",
+  "Oasis",
 ])
   assert(html.includes(fact), `Required portfolio fact missing: ${fact}`);
 for (const url of [
@@ -86,6 +92,16 @@ assert(
 const cv = await readFile(path.join(output, "normand-karol-mendoza-cv.pdf"));
 assert(cv.subarray(0, 4).toString() === "%PDF", "Download is not a PDF");
 assert((await stat(path.join(output, ".nojekyll"))).isFile());
+assert(ids.has("listening"), "Music section missing");
+assert(
+  html.includes('preload="none"'),
+  "Audio must not preload on the initial page",
+);
+assert(!/<audio\b[^>]*\bautoplay\b/.test(html), "Music must never autoplay");
+assert(
+  !/<audio\b[^>]*\bcontrols\b/.test(html),
+  "The player should use custom controls",
+);
 if (process.env.NEXT_PUBLIC_SITE_URL)
   assert(
     html.includes(

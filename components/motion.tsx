@@ -86,7 +86,9 @@ export function PortfolioMotion() {
         }),
       );
       gsap.utils
-        .toArray<HTMLElement>(".technical-row,.experience-row,.education-row")
+        .toArray<HTMLElement>(
+          ".technical-row,.experience-row,.education-row,.music-art-reveal,.music-controls",
+        )
         .forEach((row) =>
           gsap.from(row, {
             y: 30,
