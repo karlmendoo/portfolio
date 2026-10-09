@@ -1374,12 +1374,10 @@ details[open] .disclosure-symbol:after {
   isolation: isolate;
   background: var(--project-blue);
   color: var(--ink);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  display: grid;
+  grid-template-rows: 1fr auto;
   padding: 30px 35px;
 }
-.project-art-top,
 .project-art-bottom {
   position: relative;
   z-index: 3;
@@ -1402,6 +1400,7 @@ details[open] .disclosure-symbol:after {
   position: relative;
   z-index: 2;
   align-self: center;
+  justify-self: center;
   margin-right: 0.08em;
 }
 .project-art-grid {
@@ -1526,14 +1525,9 @@ details[open] .disclosure-symbol:after {
     height: 390px;
     padding: 20px;
   }
-  .project-art-top,
   .project-art-bottom {
     font-size: 12px;
     letter-spacing: 0;
-  }
-  .project-art-top > span:last-child {
-    max-width: 100px;
-    text-align: right;
   }
   .project-art-word {
     font-size: 250px;

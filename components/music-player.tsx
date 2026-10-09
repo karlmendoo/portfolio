@@ -100,11 +100,9 @@ function MusicArtwork() {
           </div>
         )}
       </div>
-      <figcaption className="mono">
-        {hasCover
-          ? "A PERSONAL LISTENING NOTE"
-          : "PERSONAL LISTENING NOTE / ARTWORK PLACEHOLDER"}
-      </figcaption>
+      {!hasCover && (
+        <figcaption className="mono">ARTWORK PLACEHOLDER</figcaption>
+      )}
     </figure>
   );
 }
@@ -136,7 +134,6 @@ export function MusicPlayer() {
       <div className="section-label">
         <span>07 / ON REPEAT</span>
         <span className="label-line" />
-        <span>A PERSONAL LISTENING NOTE</span>
       </div>
       <div className="music-heading">
         <h2 id="music-heading">

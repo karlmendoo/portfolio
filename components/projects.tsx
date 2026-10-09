@@ -10,7 +10,6 @@ const projects = [
     detail: "Chat commands · Optional chat context · Per-player cooldowns",
     className: "mcgpt",
     art: "!ai",
-    annotation: "CHAT × INTELLIGENCE",
   },
   {
     name: "SpotiCraft",
@@ -23,7 +22,6 @@ const projects = [
     detail: "Google OAuth · Playlist browsing · In-game playback controls",
     className: "spoticraft",
     art: "SC",
-    annotation: "SOUND × PLAY",
   },
 ];
 
@@ -54,10 +52,6 @@ export function Projects() {
           aria-labelledby={`project-${index}`}
         >
           <div className="project-art" aria-hidden="true">
-            <div className="project-art-top mono">
-              <span>EXPLORATION / 0{index + 1}</span>
-              <span>{project.annotation}</span>
-            </div>
             <div className="project-art-word">{project.art}</div>
             <div className="project-art-grid" />
             <div className="project-art-bottom mono">
