@@ -237,8 +237,8 @@ p {
   isolation: isolate;
 }
 .hero-stage {
-  height: 100svh;
-  min-height: 740px;
+  height: auto;
+  min-height: max(740px, 100svh);
   position: relative;
   top: 0;
   padding: 118px var(--gutter) 26px;
@@ -302,24 +302,36 @@ p {
   display: inline-block;
 }
 .hero-reveal {
-  position: absolute;
-  inset: 0;
+  position: relative;
+  margin-top: 56px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  visibility: hidden;
-  opacity: 0;
 }
 .hero-reveal > .mono {
   color: var(--accent);
   margin-bottom: 25px;
 }
 .hero-reveal p {
-  font-size: clamp(46px, 6.7vw, 110px);
+  font-size: clamp(40px, 6.7vw, 110px);
   line-height: 1.05;
   text-align: center;
   letter-spacing: -0.055em;
+}
+.motion-hero .hero {
+  height: 180svh;
+}
+.motion-hero .hero-stage {
+  height: 100svh;
+  position: sticky;
+}
+.motion-hero .hero-reveal {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  visibility: hidden;
+  opacity: 0;
 }
 .hero-bottom {
   display: grid;
@@ -935,12 +947,6 @@ details[open] .disclosure-symbol:after {
   }
 }
 @media (min-width: 1000px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
-  .motion-desktop .hero {
-    height: 180svh;
-  }
-  .motion-desktop .hero-stage {
-    position: sticky;
-  }
   .cursor {
     display: flex;
   }
@@ -969,7 +975,7 @@ details[open] .disclosure-symbol:after {
     font-size: 16.4vw;
   }
   .hero-stage {
-    min-height: 690px;
+    min-height: max(690px, 100svh);
   }
   .experience-layout {
     grid-template-columns: 1fr 2.6fr;
@@ -1066,8 +1072,8 @@ details[open] .disclosure-symbol:after {
     height: auto;
   }
   .hero-stage {
-    height: calc(100svh - 0px);
-    min-height: 620px;
+    height: auto;
+    min-height: max(620px, 100svh);
     position: relative;
     padding-top: 108px;
     padding-bottom: 23px;
@@ -1131,7 +1137,13 @@ details[open] .disclosure-symbol:after {
     padding-top: 15px;
   }
   .hero-reveal {
-    display: none;
+    margin-top: 40px;
+  }
+  .hero-reveal > .mono {
+    margin-bottom: 18px;
+  }
+  .hero-reveal p {
+    font-size: clamp(28px, 7.8vw, 60px);
   }
   .about-statement {
     grid-template-columns: 1fr;
@@ -1333,9 +1345,6 @@ details[open] .disclosure-symbol:after {
   }
   .hero-stage {
     position: relative;
-  }
-  .hero-reveal {
-    display: none;
   }
   .cursor {
     display: none !important;

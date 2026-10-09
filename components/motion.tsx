@@ -157,10 +157,10 @@ export function PortfolioMotion() {
       };
     });
     media.add(
-      "(min-width: 1000px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)",
+      "(min-height: 600px) and (prefers-reduced-motion: no-preference)",
       () => {
-        // The static page uses a normal hero until its scroll enhancement is ready.
-        document.documentElement.classList.add("motion-desktop");
+        // The hero works with native touch scrolling as well as mouse scrolling.
+        document.documentElement.classList.add("motion-hero");
         const hero = gsap.timeline({
           scrollTrigger: {
             trigger: ".hero",
@@ -193,6 +193,15 @@ export function PortfolioMotion() {
             0.4,
           )
           .to(".hero-reveal", { y: -35, ease: "none" }, 0.9);
+        return () => {
+          document.documentElement.classList.remove("motion-hero");
+        };
+      },
+    );
+    media.add(
+      "(min-width: 1000px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)",
+      () => {
+        document.documentElement.classList.add("motion-desktop");
         gsap.to(".about-marker", {
           y: 80,
           rotation: -12,

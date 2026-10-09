@@ -135,7 +135,7 @@ Project art is abstract typography, not application screenshots. No repository s
 
 `components/motion.tsx` owns the Lenis instance and GSAP lifecycle. Lenis runs only on the GSAP ticker, forwards scrolling to ScrollTrigger, and uses native touch scrolling. All event listeners, timelines, triggers, and cursor tweens are cleaned up on unmount. Disclosure changes and font readiness refresh geometry.
 
-Desktop motion includes a sticky hero transformation, differently paced typographic and grid layers in the project art, and section-specific reveals. Mobile uses a sequential composition, a compact menu, and no cursor or pinned hero. Reduced motion disables Lenis, cursor effects, parallax, and entrance animation. The desktop cursor supplements the native pointer and never intercepts input.
+The sticky name-to-statement hero transformation works across screen widths and input types, including native touch scrolling. Its typography scales for phones and tablets. Short landscape viewports (under 600px high), reduced-motion mode, and the unenhanced static page show the statement in normal flow instead of hiding it. Mobile retains its compact menu and has no custom cursor. Project parallax and the supplemental cursor remain desktop effects; reduced motion disables Lenis, cursor effects, parallax, and entrance animation.
 
 The page retains semantic headings, native links and disclosures, visible keyboard focus, a skip link, Escape-closeable navigation, destination focus for anchors, and a live status for email copying. Static HTML keeps all core content and links available without JavaScript.
 

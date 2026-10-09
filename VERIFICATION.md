@@ -93,3 +93,13 @@ The existing footer now includes “Made with 🩷 & Lenis” below its copyrigh
 The footer was visually checked at 1280, 768, 390, and 320px viewport widths. All reported equal document and viewport widths, the signature stayed on one line, and the smallest mobile layout kept credits and Back to Top on the same row. The footer signature occupies about 15px of line height. No footer redesign or additional JavaScript was introduced.
 
 The playback-state checks, production build/typecheck, and `/portfolio/` static-export verification passed with 22 referenced assets. Browser console warnings and errors were empty. Existing recovery branches and tags were retained.
+
+## Hero statement across devices — 10 October 2026
+
+The statement had been hidden by mobile and reduced-motion CSS, while its only reveal timeline required a viewport at least 1000px wide with hover and a fine pointer. The hero now has an independent `motion-hero` enhancement for viewports at least 600px high with no reduced-motion preference, without a width or pointer restriction. Desktop cursor and project parallax retain their separate device conditions.
+
+The base layout displays the statement in normal flow, so reduced-motion mode, short landscape viewports, and the unenhanced static page retain the content. The enhanced layout overlays it during the name-to-statement scroll transition. Mobile typography scales to fit narrow screens; stable viewport units size the sticky stage.
+
+Browser QA on the actual `/portfolio/` static export confirmed the visible scroll reveal at 390px mobile width, its readable layout at 320px and 768px, and the retained desktop transition at 1280px. Resizing to an 844×390 landscape viewport removed the enhancement and its inline animation styles, leaving the statement visible in normal flow. Document and viewport widths matched throughout. Actual touch hardware and system reduced-motion emulation were unavailable; the pointer-independent query, native-touch Lenis configuration, and reduced-motion/static CSS fallback were reviewed directly.
+
+The production build/typecheck and export checks passed with 22 referenced assets. Hero copy, media files, player, footer signature, and portfolio content were preserved.
