@@ -77,11 +77,11 @@ npm ci
 npm run dev
 ```
 
-Return with `git switch codex/pastel-music`. To inspect the pre-music version, use `git switch backup/pre-music-redesign`. To create a separate recovery checkout, use `git worktree add ../portfolio-original backup/pre-awwwards-redesign` when that branch is not already checked out. To restore a version to production without rewriting history, create a normal revert commit or a reviewed restoration commit on `main`, then run the Pages workflow. Do not delete preservation refs or force-push recovery changes.
+Return with `git switch main`. To inspect the pre-music version, use `git switch backup/pre-music-redesign`. To create a separate recovery checkout, use `git worktree add ../portfolio-original backup/pre-awwwards-redesign` when that branch is not already checked out. To restore a version to production without rewriting history, create a normal revert commit or a reviewed restoration commit on `main`, then run the Pages workflow. Do not delete preservation refs or force-push recovery changes.
 
 ## Music player
 
-The featured listening note is **Wonderwall — Oasis**. No Oasis recording or official artwork is included. The published player shows a custom abstract placeholder and keeps playback disabled until an authorized audio file is added. This is an intentional complete silent state, with no missing-file requests or false playing state.
+The featured listening note is **Wonderwall — Oasis**. The recording and album cover supplied by the user are included at the paths below. Playback starts only after an explicit Play action. If a media file is removed, the static build automatically restores the complete silent state or original artwork placeholder, without missing-file requests or a false playing state.
 
 ### Add authorized media
 
@@ -138,6 +138,8 @@ Project art is abstract typography, not application screenshots. No repository s
 Desktop motion includes a sticky hero transformation, differently paced typographic and grid layers in the project art, and section-specific reveals. Mobile uses a sequential composition, a compact menu, and no cursor or pinned hero. Reduced motion disables Lenis, cursor effects, parallax, and entrance animation. The desktop cursor supplements the native pointer and never intercepts input.
 
 The page retains semantic headings, native links and disclosures, visible keyboard focus, a skip link, Escape-closeable navigation, destination focus for anchors, and a live status for email copying. Static HTML keeps all core content and links available without JavaScript.
+
+The footer includes a small “Made with 🩷 & Lenis” signature. Only Lenis links to its GitHub repository, with a new-tab announcement and safe external-link attributes. Hover or keyboard focus reveals an underline and nudges the arrow; the heart gently scales once. Reduced-motion mode keeps these details static. The existing footer name, copyright, and Back to Top layout are retained.
 
 Latin font subsets limit font downloads. The split-text component adds no library, and no WebGL runtime, animation-frame loop, or continuous background animation is added. Static output verification checks deployment prefixes, referenced assets, anchor destinations, required facts, the CV, and exact GitHub URLs.
 

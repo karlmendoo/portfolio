@@ -96,7 +96,28 @@ export function Contact() {
         <a className="footer-name" href="#top">
           Normand Karol Mendoza
         </a>
-        <span>© 2026</span>
+        <div className="footer-meta">
+          <span>© 2026</span>
+          <p className="footer-signature">
+            Made with{" "}
+            <span className="footer-heart" role="img" aria-label="love">
+              🩷
+            </span>{" "}
+            &amp;{" "}
+            <a
+              className="footer-lenis"
+              href="https://github.com/darkroomengineering/lenis"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Lenis on GitHub (opens in a new tab)"
+            >
+              Lenis
+              <span className="footer-arrow" aria-hidden="true">
+                ↗
+              </span>
+            </a>
+          </p>
+        </div>
         <a className="back-top text-link" href="#top">
           Back to top <span aria-hidden="true">+</span>
         </a>

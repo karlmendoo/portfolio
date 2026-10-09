@@ -824,6 +824,73 @@ details[open] .disclosure-symbol:after {
 .footer-line a:hover {
   color: var(--accent);
 }
+.footer-meta {
+  display: grid;
+  gap: 6px;
+  text-align: center;
+}
+.footer-signature {
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 0.015em;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+.footer-heart {
+  display: inline-block;
+  font-size: 12px;
+  line-height: 1;
+  transform-origin: center;
+}
+.footer-signature:hover .footer-heart,
+.footer-signature:focus-within .footer-heart {
+  animation: signature-heart 380ms ease-out;
+}
+@keyframes signature-heart {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  45% {
+    transform: scale(1.08);
+  }
+}
+.footer-lenis {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  position: relative;
+  transition: color 180ms ease;
+}
+.footer-lenis:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 14px;
+  bottom: -2px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 180ms ease;
+}
+.footer-arrow {
+  opacity: 0.55;
+  transition:
+    transform 180ms ease,
+    opacity 180ms ease;
+}
+.footer-lenis:is(:hover, :focus-visible):after {
+  transform: scaleX(1);
+}
+.footer-lenis:is(:hover, :focus-visible) .footer-arrow {
+  opacity: 1;
+  transform: translate(1px, -1px);
+}
+.footer-lenis:focus-visible {
+  border-radius: 2px;
+  outline-offset: 4px;
+}
 .cursor {
   position: fixed;
   left: 0;
@@ -1239,6 +1306,9 @@ details[open] .disclosure-symbol:after {
   .footer-line .text-link {
     font-size: 12px;
   }
+  .footer-meta {
+    text-align: left;
+  }
   .desktop-break {
     display: none;
   }
@@ -1247,6 +1317,10 @@ details[open] .disclosure-symbol:after {
   }
 }
 @media (prefers-reduced-motion: reduce) {
+  .footer-heart,
+  .footer-lenis:is(:hover, :focus-visible) .footer-arrow {
+    transform: none;
+  }
   *,
   *:before,
   *:after {
@@ -1494,6 +1568,12 @@ details[open] .disclosure-symbol:after {
   }
 }
 @media (max-width: 420px) {
+  .footer-line {
+    column-gap: 6px;
+  }
+  .footer-line .back-top {
+    gap: 4px;
+  }
   .hero-topline {
     font-size: 11px;
     gap: 12px;

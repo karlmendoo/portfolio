@@ -81,3 +81,15 @@ Typechecking, `npm run test:music`, production builds, and static-export checks 
 The production push at `1bfcbf1d210f182615885cb5c22d6edf960f732e` automatically triggered [Actions run 37958858789](https://github.com/karlmendoo/portfolio/actions/runs/37958858789). Build and deployment completed successfully, including playback-state checks. The live page and CV returned HTTP 200, and the production CV SHA-256 still matched the original.
 
 The browser confirmed Listening navigation, Wonderwall/Oasis metadata, custom placeholder artwork, disabled playback without an audio file, exactly one audio element with no missing-media source, and the default blue mood. The published page had no horizontal overflow at its normal viewport and no console warnings or errors. A production screenshot was saved for delivery.
+
+## Supplied media and footer signature — 10 October 2026
+
+The user's `wonderwall.mp3` and `wonderwall-cover.webp` were copied unchanged into `public/music/`. SHA-256 checks matched both source files to the repository copies. The static build detected both assets; the export references them through `/portfolio/music/`.
+
+Actual browser playback of the supplied MP3 loaded a duration of 4:18, advanced progress, and activated the Wonderwall palette only after successful playback. Pausing preserved progress and returned the global mood to default blue. The album cover loaded through the existing artwork component. The local audio byte-range request returned HTTP 206 and the cover returned HTTP 200 with `image/webp`.
+
+The existing footer now includes “Made with 🩷 & Lenis” below its copyright. Only Lenis is linked; its exact repository URL, `_blank` target, `noopener noreferrer`, and new-tab accessible label were checked. Keyboard Tab reached the link with a visible focus outline. CSS supplies a single gentle heart scale and short underline/arrow transitions; reduced-motion rules disable animation and arrow movement. Native reduced-motion emulation remains unavailable in the connected browser.
+
+The footer was visually checked at 1280, 768, 390, and 320px viewport widths. All reported equal document and viewport widths, the signature stayed on one line, and the smallest mobile layout kept credits and Back to Top on the same row. The footer signature occupies about 15px of line height. No footer redesign or additional JavaScript was introduced.
+
+The playback-state checks, production build/typecheck, and `/portfolio/` static-export verification passed with 22 referenced assets. Browser console warnings and errors were empty. Existing recovery branches and tags were retained.
