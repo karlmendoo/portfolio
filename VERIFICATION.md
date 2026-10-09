@@ -26,7 +26,7 @@ It passed Linux dependency installation, typechecking, static export, artifact v
 
 The workflow is configured for pushes to `main` and supports manual dispatch. The final production push retains the same tests and includes the progressive-enhancement fallback refinement. HTTPS is enforced. The `karlmendoo.github.io` repository was not modified.
 
-Automatic push-triggered publication could not be verified: multiple Git pushes and a GitHub API commit did not create new Actions runs, despite the correct push event, active workflow, enabled Actions settings, and production default branch. Manual dispatch does start the workflow successfully. This is a remaining deployment limitation; no account-side cause was established.
+On 9 October, automatic push-triggered publication could not be verified: multiple Git pushes and a GitHub API commit did not create new Actions runs, despite the correct push event, active workflow, enabled Actions settings, and production default branch. Manual dispatch did start the workflow successfully; no account-side cause was established. The 10 October production push subsequently triggered a successful automatic deployment, as recorded below.
 
 The initial live deployment also passed HTTP checks for all ten directly referenced JavaScript/CSS/favicon/CV URLs. The downloaded production CV matched the original SHA-256 above. Live mobile navigation closed its menu, updated the hash, focused the work section, and showed no horizontal overflow or console errors. The desktop hero changed from the name composition to the systems/people statement during an actual wheel scroll.
 
@@ -75,3 +75,9 @@ Playback, pause, seek, volume, and navigation were exercised with keyboard input
 Reduced-motion CSS and the theme controller's media-query listener were reviewed: equalizer/artwork animation stops, the mood blend is brief, and preference changes cancel the active mood tween. The connected browser cannot emulate the system preference, so a native reduced-motion rendering test was not available.
 
 Typechecking, `npm run test:music`, production builds, and static-export checks passed. Root-domain and `/portfolio/` exports were verified; the final export uses the real GitHub Pages URL. Checks include all referenced assets, retained facts, anchors, canonical URL, CV, music metadata, no autoplay, custom controls, and matching static/default mood colors. The final silent export has no console warnings or errors. No additional dependency, AudioContext, WebGL workload, or RAF loop was introduced.
+
+### Published verification
+
+The production push at `1bfcbf1d210f182615885cb5c22d6edf960f732e` automatically triggered [Actions run 37958858789](https://github.com/karlmendoo/portfolio/actions/runs/37958858789). Build and deployment completed successfully, including playback-state checks. The live page and CV returned HTTP 200, and the production CV SHA-256 still matched the original.
+
+The browser confirmed Listening navigation, Wonderwall/Oasis metadata, custom placeholder artwork, disabled playback without an audio file, exactly one audio element with no missing-media source, and the default blue mood. The published page had no horizontal overflow at its normal viewport and no console warnings or errors. A production screenshot was saved for delivery.
