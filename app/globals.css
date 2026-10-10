@@ -438,10 +438,6 @@ p {
   align-self: end;
   max-width: 330px;
 }
-.about-note {
-  margin-top: 40px;
-  color: var(--muted);
-}
 .currently-heading {
   color: var(--muted);
   font-weight: 400;
@@ -1308,9 +1304,6 @@ details[open] .disclosure-symbol:after {
   }
   .about-copy {
     order: 1;
-  }
-  .about-note {
-    display: none;
   }
   .about-copy p {
     font-size: 16px;

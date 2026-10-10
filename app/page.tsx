@@ -48,10 +48,6 @@ export default function Home() {
           <div className="about-bottom">
             <div className="about-aside">
               <Currently />
-              <p className="about-note mono">
-                TECHNOLOGY. PEOPLE.
-                <br />A GROWING PERSPECTIVE.
-              </p>
             </div>
             <div className="about-copy">
               <p>
