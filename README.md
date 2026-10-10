@@ -24,7 +24,7 @@ npm run preview
 
 The workflow at `.github/workflows/deploy.yml` installs dependencies, typechecks, builds, verifies the exported assets and content, uploads `out/`, and deploys it. It runs on pushes to `main` and can be started manually in Actions.
 
-In the repository, open **Settings → Pages → Build and deployment → Source** and select **GitHub Actions**. The production branch is `main`. The default repository URL is `https://karlmendoo.github.io/portfolio/`.
+In the repository, open **Settings → Pages → Build and deployment → Source** and select **GitHub Actions**. The production branch is `main`. The configured production domain is `https://karlmendoo.me/`; the repository URL is `https://karlmendoo.github.io/portfolio/`.
 
 The `configure-pages` action supplies the real deployment base path and URL. These become `NEXT_PUBLIC_BASE_PATH` and `NEXT_PUBLIC_SITE_URL` at build time. Next's `basePath` prefixes generated JavaScript and CSS; `assetPath()` prefixes public files, including the CV and favicon. Hash navigation stays within the current deployment path. All repository and profile links are absolute GitHub URLs.
 
@@ -48,7 +48,7 @@ For a root deployment, remove the base-path environment variable and set the des
 
 ```powershell
 Remove-Item Env:NEXT_PUBLIC_BASE_PATH -ErrorAction SilentlyContinue
-$env:NEXT_PUBLIC_SITE_URL = 'https://your-domain.example'
+$env:NEXT_PUBLIC_SITE_URL = 'https://karlmendoo.me'
 npm run build
 npm run verify:export
 npm run preview
@@ -56,11 +56,29 @@ npm run preview
 
 ### Custom domain
 
-Configure the real domain in **Settings → Pages → Custom domain**, follow GitHub's DNS instructions, and enable HTTPS. If retaining a domain file in source, put the actual hostname in `public/CNAME`. Do not put a placeholder domain there. The Pages action derives the correct root base path and canonical URL from the configured domain; no source rewrite is needed.
+The domain `karlmendoo.me` is configured in **Settings → Pages → Custom domain**, with HTTPS enabled. The Pages action derives the correct root base path and canonical URL from this configuration. This Actions deployment does not need a `CNAME` file. `lib/paths.ts` centralizes URL configuration and defaults to the real production domain when no build-time override is supplied.
 
 The existing `.openai/hosting.json` also retains compatibility with the original private Sites deployment. Build at the root with that Site's URL when publishing there. It does not change GitHub Pages settings.
 
+## Personal details and browser identity
+
+Edit `lib/personal-details.ts` to update the Currently copy, the exact LinkedIn profile, local-time configuration, or page title and description. Currently lives inside About, using the existing editorial grid. GitHub and CV links retain their existing destinations.
+
+The hero and footer share one client-side clock through `LocalTimeProvider`. It explicitly formats `Asia/Manila` in 24-hour `HH:MM` form, updates at minute boundaries, refreshes after returning to the tab, and cleans up its timer and visibility listener. The static placeholder is identical during hydration. The clock does not announce updates or react to music.
+
+Browser metadata includes a canonical URL, Open Graph and large social-card metadata, stable pastel theme color, SVG/ICO/PNG favicons, and a 180px Apple touch icon. The 1200 × 630 social image is a prebuilt PNG in `public/social-preview.png`; production needs no image-generation runtime. Rebuild these small brand assets with existing dependencies:
+
+```bash
+node scripts/generate-brand-assets.mjs
+```
+
+`app/not-found.tsx` exports the portfolio-branded static `404.html` with a path-aware home link and noindex metadata. The local preview server serves that file with HTTP 404 for missing routes, matching GitHub Pages. The export verifier checks both pages' assets, social metadata, LinkedIn, and the 404 return destination.
+
+The shortened entrance uses the existing GSAP context, skips deep links and restored scroll positions, and has no scroll lock or extra RAF loop. Currently and the 404 entrance respect reduced motion. Text selection stays tied to the permanent blue palette.
+
 ## Original version and recovery
+
+The complete version before the finishing-details upgrade is preserved at commit `aeddb156991127edd786bef4a509aa9b5b131d55` in branch `backup/pre-finishing-details` and tag `pre-finishing-details`.
 
 The pre-redesign portfolio is preserved at commit `804455e2a54bc8546967989a2351797f28620a25` in both:
 

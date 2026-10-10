@@ -59,22 +59,52 @@ export function PortfolioMotion() {
       smooth.on("scroll", ScrollTrigger.update);
       gsap.ticker.add(tick);
       gsap.ticker.lagSmoothing(0);
-      gsap.from(".hero-name .split-char", {
-        yPercent: 90,
-        opacity: 0,
-        stagger: 0.028,
-        duration: 1.15,
-        ease: "power4.out",
-        clearProps: "transform,opacity",
+      // Skip the entrance for deep links and restored scroll positions.
+      if (
+        window.scrollY < 40 &&
+        (!window.location.hash ||
+          ["#top", "#main"].includes(window.location.hash))
+      ) {
+        gsap.from(".hero-name .split-char", {
+          yPercent: 65,
+          opacity: 0.25,
+          stagger: { amount: 0.18 },
+          duration: 0.65,
+          ease: "power4.out",
+          clearProps: "transform,opacity",
+        });
+        gsap.from(".hero-topline,.hero-title-caption,.hero-bottom", {
+          opacity: 0.4,
+          y: 8,
+          stagger: 0.055,
+          delay: 0.12,
+          duration: 0.45,
+          clearProps: "transform,opacity",
+        });
+        gsap.from(".navigation", {
+          opacity: 0.65,
+          y: -4,
+          duration: 0.4,
+          clearProps: "transform,opacity",
+        });
+      }
+      const status = gsap.timeline({
+        defaults: {
+          duration: 0.4,
+          ease: "power2.out",
+          clearProps: "transform,opacity",
+        },
+        scrollTrigger: { trigger: ".currently", start: "top 92%", once: true },
       });
-      gsap.from(".hero-topline,.hero-title-caption,.hero-bottom", {
-        opacity: 0,
-        y: 12,
-        stagger: 0.1,
-        delay: 0.3,
-        duration: 0.8,
-        clearProps: "transform,opacity",
-      });
+      status
+        .from(".currently-heading", { y: 6, opacity: 0.4 })
+        .from(".currently-rule", { scaleX: 0, transformOrigin: "left" }, 0.05)
+        .from(".currently-primary", { y: 8, opacity: 0.4 }, 0.1)
+        .from(
+          ".currently-secondary,.currently-availability",
+          { y: 6, opacity: 0.4, stagger: 0.06 },
+          0.16,
+        );
       gsap.utils.toArray<HTMLElement>(".label-line").forEach((line) =>
         gsap.from(line, {
           scaleX: 0,

@@ -103,3 +103,21 @@ The base layout displays the statement in normal flow, so reduced-motion mode, s
 Browser QA on the actual `/portfolio/` static export confirmed the visible scroll reveal at 390px mobile width, its readable layout at 320px and 768px, and the retained desktop transition at 1280px. Resizing to an 844×390 landscape viewport removed the enhancement and its inline animation styles, leaving the statement visible in normal flow. Document and viewport widths matched throughout. Actual touch hardware and system reduced-motion emulation were unavailable; the pointer-independent query, native-touch Lenis configuration, and reduced-motion/static CSS fallback were reviewed directly.
 
 The production build/typecheck and export checks passed with 22 referenced assets. Hero copy, media files, player, footer signature, and portfolio content were preserved.
+
+## Finishing details — 10 October 2026
+
+The complete pre-upgrade version is retained at `aeddb156991127edd786bef4a509aa9b5b131d55` in branch `backup/pre-finishing-details` and tag `pre-finishing-details`. The working tree was clean before implementation. Existing recovery refs, CV, recording, and album cover were preserved; all three supplied-file SHA-256 values still match the earlier verification.
+
+Currently is a small editorial block within About, driven by `lib/personal-details.ts`. The existing About copy and section architecture remain intact. The exact supplied LinkedIn URL is rendered as a semantic external anchor with `_blank`, `noopener noreferrer`, and an accessible new-tab label. Keyboard Tab moved from Copy email to GitHub and then LinkedIn, with a visible 2px focus outline.
+
+The hero and footer share a single minute-boundary timer. A browser context set to `America/Los_Angeles`, with simulated time at `2026-10-09T16:59:00Z`, displayed `00:59` in both Manila clocks; advancing one minute displayed `01:00` in both. Neither clock has an aria-live attribute. The placeholder remains `--:--` when JavaScript is disabled; no hydration errors occurred. Cleanup and return-to-tab refresh are included in the provider.
+
+Browser checks at 1280, 768, 390, and 320px showed no horizontal overflow. The smallest footer retains the identity, clock, signature, and Back to Top without wrapping the signature. Screenshots of the desktop About composition, mobile footer, and branded 404 were visually inspected. The new social poster was inspected at 1200 × 630; it uses the existing fonts and factual UST student copy. Its optimized PNG is about 43KB; SVG, ICO, PNG favicon, and Apple icon total about 3KB.
+
+Reduced-motion browser emulation leaves Currently and hero text fully visible, disables the hero scroll enhancement, removes the heart animation, and keeps the 404 entrance static. The custom 404 returns HTTP 404, a specific 404 title, noindex metadata, and a functional home link. Its assets loaded correctly. Chromium logs the expected HTTP 404 for a deliberately missing document; there were no application exceptions or missing assets.
+
+Emulated touch navigation at 390px passed Menu → About and the experience link, with no overflow. Delaying JavaScript requests by 500ms left the initial name visible, scroll unlocked, and the page interactive after hydration. Deep-linking to Listening skipped the name entrance. Reloading at scroll position 5000 retained the position in the same section (5048 after font/layout settling), with no replayed hero entrance or reset to the top. JavaScript-disabled rendering still includes the name, About/Currently, branded metadata, and usable document links.
+
+Actual Wonderwall playback loaded the unchanged 258.8-second recording and activated the Wonderwall mood with exactly one audio element. Pause restored the default mood. Both clocks, the permanent `#eaf3ff` browser theme color, and pastel text-selection colors stayed stable through play and pause. Artwork loaded at its native 500px size.
+
+Existing playback-state checks, typechecking, and both root and `/portfolio/` production exports passed. The export verifier checks 26 referenced files, both pages, required portfolio content, social metadata, the LinkedIn destination, and path-aware 404 navigation. The subpath browser check confirmed the custom 404 home link, prefixed assets, canonical URL, and social image URL; no asset requests failed.

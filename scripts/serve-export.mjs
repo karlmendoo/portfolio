@@ -12,6 +12,7 @@ const mime = {
   ".js": "text/javascript",
   ".json": "application/json",
   ".svg": "image/svg+xml",
+  ".ico": "image/x-icon",
   ".pdf": "application/pdf",
   ".woff2": "font/woff2",
   ".woff": "font/woff",
@@ -75,8 +76,20 @@ http
         response.end(request.method === "HEAD" ? undefined : content);
       }
     } catch {
-      response.writeHead(404, { "Content-Type": "text/plain" });
-      response.end("Not found");
+      // Match GitHub Pages' static 404 handling during local QA.
+      let content;
+      try {
+        content = await readFile(path.join(directory, "404.html"));
+      } catch {
+        content = Buffer.from("Not found");
+      }
+      response.writeHead(404, {
+        "Content-Type":
+          content[0] === 60 ? "text/html; charset=utf-8" : "text/plain",
+        "Cache-Control": "no-store",
+        "Content-Length": content.length,
+      });
+      response.end(request.method === "HEAD" ? undefined : content);
     }
   })
   .listen(port, "127.0.0.1", () =>

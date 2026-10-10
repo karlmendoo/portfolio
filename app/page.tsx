@@ -10,6 +10,7 @@ import { PortfolioMotion } from "@/components/motion";
 import { MusicProvider } from "@/components/music-provider";
 import { MusicPlayer, MiniPlayer } from "@/components/music-player";
 import { getMusicTracks } from "@/lib/music-assets";
+import { Currently } from "@/components/currently";
 
 export default function Home() {
   return (
@@ -45,10 +46,13 @@ export default function Home() {
             </h2>
           </div>
           <div className="about-bottom">
-            <span className="mono">
-              TECHNOLOGY. PEOPLE.
-              <br />A GROWING PERSPECTIVE.
-            </span>
+            <div className="about-aside">
+              <Currently />
+              <p className="about-note mono">
+                TECHNOLOGY. PEOPLE.
+                <br />A GROWING PERSPECTIVE.
+              </p>
+            </div>
             <div className="about-copy">
               <p>
                 I’m Normand, a Computer Science student majoring in Data Science

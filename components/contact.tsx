@@ -2,6 +2,8 @@
 import { useEffect, useRef, useState } from "react";
 import { email, github } from "@/lib/content";
 import { assetPath } from "@/lib/paths";
+import { linkedin } from "@/lib/personal-details";
+import { LocalClock } from "./local-clock";
 export function Contact() {
   const [status, setStatus] = useState("");
   const timeout = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -59,15 +61,29 @@ export function Contact() {
           </div>
           <div className="contact-links">
             <a
-              className="text-link"
+              className="text-link external-link"
               href={github}
               target="_blank"
               rel="noopener noreferrer"
               data-cursor="GITHUB"
+              aria-label="GitHub profile (opens in a new tab)"
             >
               GitHub{" "}
-              <span className="link-plus" aria-hidden="true">
-                +
+              <span className="external-arrow" aria-hidden="true">
+                ↗
+              </span>
+            </a>
+            <a
+              className="text-link external-link"
+              href={linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-cursor="LINKEDIN"
+              aria-label="LinkedIn profile (opens in a new tab)"
+            >
+              LinkedIn{" "}
+              <span className="external-arrow" aria-hidden="true">
+                ↗
               </span>
             </a>
             <a
@@ -98,6 +114,7 @@ export function Contact() {
         </a>
         <div className="footer-meta">
           <span>© 2026</span>
+          <LocalClock />
           <p className="footer-signature">
             Made with{" "}
             <span className="footer-heart" role="img" aria-label="love">
