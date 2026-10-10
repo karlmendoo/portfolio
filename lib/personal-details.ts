@@ -16,7 +16,7 @@ export const linkedin =
 
 export const siteDetails = {
   name: "Normand Karol Mendoza",
-  title: "Normand Karol Mendoza — Developer",
+  title: "Normand Karol Mendoza — CS Student",
   description:
     "Portfolio of Normand Karol Mendoza, a Computer Science student at UST exploring web development, data science, and backend AI engineering.",
   previewAlt:
